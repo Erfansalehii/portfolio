@@ -1,8 +1,6 @@
 backend:
   name: git-gateway
-  repo: Erfansalehii/portfolio
   branch: main 
-  base_url: https://decap-cms-oauth.vercel.app # This line handles the login
 
 media_folder: "images"
 public_folder: "/images"
