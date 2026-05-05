@@ -195,7 +195,10 @@
       </div>
       
       <!-- Netlify Contact Form -->
-      <form name="contact" method="POST" data-netlify="true" class="contact-form">
+      <form name="contact" method="POST" data-netlify="true" action="/" class="contact-form">
+        <!-- This hidden field is required for Netlify to catch the submission -->
+        <input type="hidden" name="form-name" value="contact" />
+        
         <input type="email" name="email" placeholder="Your Email Address" required>
         <input type="text" name="subject" placeholder="Subject" required>
         <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
