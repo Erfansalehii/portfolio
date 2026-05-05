@@ -96,12 +96,9 @@
   <h2>Recent Posts</h2>
   <p>Thoughts on AI, research, and engineering.</p>
   
-  <div class="posts-grid">
-    <a href="#" class="post-card">
-      <div class="post-date">April 2026</div>
-      <div class="post-title">Sample Post Title</div>
-      <p>A short description of what this post is about will go right here.</p>
-    </a>
+  <!-- Dynamic Post Container -->
+  <div class="posts-grid" id="post-container">
+    <p style="font-size: 0.8rem; color: var(--muted);">Loading posts...</p>
   </div>
 </section>
 
@@ -120,6 +117,58 @@
 <footer>
   © 2026 Erfan Salehi. All rights reserved.
 </footer>
+
+<!-- Tools to read CMS files -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
+
+<!-- Script to load your posts from GitHub -->
+<script>
+  async function loadPosts() {
+    const container = document.getElementById('post-container');
+    
+    try {
+      const response = await fetch('https://api.github.com/repos/Erfansalehii/portfolio/contents/posts');
+      const files = await response.json();
+
+      if (!Array.isArray(files) || files.length === 0) {
+        container.innerHTML = '<p style="font-size: 0.8rem; color: var(--muted);">No posts yet.</p>';
+        return;
+      }
+
+      container.innerHTML = ''; // Clear loading text
+
+      for (const file of files) {
+        if (file.name.endsWith('.md')) {
+          const fileRes = await fetch(file.download_url);
+          const text = await fileRes.text();
+
+          const parts = text.split('---');
+          if (parts.length >= 3) {
+            const settings = jsyaml.load(parts[1]);
+            
+            const dateStr = settings.date ? new Date(settings.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent';
+            const desc = settings.description || 'Click to read more...';
+            
+            const card = document.createElement('div');
+            card.className = "post-card";
+            card.innerHTML = `
+              <div class="post-date">${dateStr}</div>
+              <div class="post-title">${settings.title}</div>
+              <p>${desc}</p>
+            `;
+            container.appendChild(card);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      container.innerHTML = '<p style="font-size: 0.8rem; color: var(--muted);">Failed to load posts.</p>';
+    }
+  }
+
+  loadPosts();
+</script>
 
 <script>
   if (window.netlifyIdentity) {
