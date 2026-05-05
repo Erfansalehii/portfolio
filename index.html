@@ -4,115 +4,207 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Erfan Salehi — AI Researcher & Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <style>
   :root {
-    --bg: #06060a;
-    --bg2: #0e0e16;
-    --bg3: #16161f;
-    --accent: #7f77dd;
-    --text: #f0eeff;
-    --muted: #888098;
-    --border: rgba(127,119,221,0.18);
+    --bg-page: #f3f2ef; /* LinkedIn light gray background */
+    --bg-card: #ffffff; /* White card background */
+    --text-main: #000000;
+    --text-muted: #666666;
+    --accent: #0a66c2; /* LinkedIn blue */
+    --border: #e0e0e0;
   }
+  
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; min-height: 100vh; }
+  body { background: var(--bg-page); color: var(--text-main); font-family: 'Inter', sans-serif; min-height: 100vh; }
 
   /* Navigation */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 3rem;
-    background: rgba(6,6,10,0.85); backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--border);
+    padding: 1rem 3rem;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
   }
-  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--accent); }
+  .nav-logo { font-weight: 700; font-size: 1.2rem; color: var(--accent); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.72rem; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--text); }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
 
-  /* Hero Section */
-  .hero {
-    padding: 10rem 3rem 5rem;
-    display: flex; flex-direction: column; justify-content: center;
-    border-bottom: 0.5px solid var(--border);
+  /* Container for main content */
+  .container { max-width: 1128px; margin: 0 auto; padding: 6rem 1.5rem 2rem; }
+
+  /* Profile Header Section */
+  .profile-header {
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    position: relative;
   }
-  .hero-tag { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; line-height: 1; }
+  
+  /* Replace the src with your cover image link */
+  .cover-photo {
+    width: 100%;
+    height: 200px;
+    background-color: #a0b4b7; /* Placeholder color */
+    object-fit: cover;
+  }
+  
+  .profile-info { padding: 1.5rem; padding-top: 0; position: relative; }
+  
+  /* Replace the src with your profile picture link */
+  .profile-pic {
+    width: 152px;
+    height: 152px;
+    border-radius: 50%;
+    border: 4px solid var(--bg-card);
+    background-color: #e0e0e0; /* Placeholder color */
+    object-fit: cover;
+    margin-top: -76px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .profile-name { font-size: 1.5rem; font-weight: 600; margin-top: 1rem; }
+  .profile-headline { font-size: 1rem; color: var(--text-main); margin-top: 0.2rem; }
+  
+  /* Card Styles */
+  .card {
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-main); }
+  .about-text { color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; }
 
-  /* Sections */
-  section { padding: 5rem 3rem; border-bottom: 0.5px solid var(--border); }
-  .section-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
-  h2 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
-  p { color: var(--muted); line-height: 1.8; font-size: 0.9rem; max-width: 600px; }
+  /* 2/3 and 1/3 Grid Layout */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
 
-  /* Posts Grid */
-  .posts-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
-  .post-card { background: var(--bg2); padding: 2rem; border: 0.5px solid var(--border); text-decoration: none; display: block; transition: background 0.2s; }
-  .post-card:hover { background: var(--bg3); }
-  .post-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; color: var(--text); margin-bottom: 0.5rem; }
-  .post-date { font-size: 0.7rem; color: var(--accent); }
+  /* Post/Certificate Item Styles */
+  .post-item {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .post-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .post-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  
+  /* This ensures images/videos inside posts fit inside the card */
+  .post-body { color: var(--text-main); font-size: 0.9rem; line-height: 1.5; }
+  .post-body img, .post-body video { max-width: 100%; height: auto; border-radius: 4px; margin-top: 0.5rem; }
 
-  /* Contact Links */
-  .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text); text-decoration: none; margin-right: 2rem; margin-top: 1rem; font-size: 0.85rem; }
-  .contact-link:hover { color: var(--accent); }
+  /* Contact Form Styles */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .contact-link { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.8rem; font-weight: 500; }
+  .contact-link:hover { text-decoration: underline; }
+  
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input, .contact-form textarea {
+    width: 100%; padding: 0.8rem; border: 1px solid var(--border); border-radius: 4px; font-family: 'Inter', sans-serif;
+  }
+  .contact-form button {
+    background: var(--accent); color: white; border: none; padding: 0.8rem; border-radius: 20px; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .contact-form button:hover { background: #004182; }
 
   /* Footer */
-  footer { padding: 2rem 3rem; font-size: 0.7rem; color: var(--muted); text-align: center; }
+  footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; }
 
   @media (max-width: 768px) {
-    nav, .hero, section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .main-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">ES_</div>
+  <div class="nav-logo">Erfan Salehi</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#posts">Posts</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<div class="hero">
-  <div class="hero-tag">AI Researcher & Engineer</div>
-  <h1>Erfan Salehi</h1>
-</div>
-
-<section id="about">
-  <div class="section-label">About Me</div>
-  <h2>A little about me</h2>
-  <p>[ I will write this part later about myself, my background, and my work. ]</p>
-</section>
-
-<section id="posts">
-  <div class="section-label">Writing</div>
-  <h2>Recent Posts</h2>
-  <p>Thoughts on AI, research, and engineering.</p>
+<div class="container">
   
-  <!-- Dynamic Post Container -->
-  <div class="posts-grid" id="post-container">
-    <p style="font-size: 0.8rem; color: var(--muted);">Loading posts...</p>
+  <!-- Profile Header -->
+  <div class="profile-header">
+    <img src="https://via.placeholder.com/1200x200" alt="Cover Photo" class="cover-photo">
+    <div class="profile-info">
+      <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+      <h1 class="profile-name">Erfan Salehi</h1>
+      <p class="profile-headline">AI Researcher & Engineer</p>
+    </div>
   </div>
-</section>
 
-<section id="contact">
-  <div class="section-label">Connect</div>
-  <h2>Get in touch</h2>
-  <p>Open to conversations about AI and engineering.</p>
-  <div>
-    <a href="mailto:erfan@erfansalehi.com" class="contact-link">Email</a>
-    <a href="https://github.com/erfansalehi" class="contact-link" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/erfansalehi" class="contact-link" target="_blank">LinkedIn</a>
-    <a href="https://x.com/erfansalehi" class="contact-link" target="_blank">X (Twitter)</a>
+  <!-- About Section -->
+  <div class="card" id="about">
+    <h2 class="card-title">About</h2>
+    <p class="about-text">
+      AI researcher who... [I will complete this part later about myself, my background, and my work.]
+    </p>
   </div>
-</section>
+
+  <!-- Main Grid (Projects Left, Certificates Right) -->
+  <div class="main-grid" id="projects">
+    
+    <!-- Left Column: Projects & Posts (2/3 width) -->
+    <div class="card">
+      <h2 class="card-title">Projects & Posts</h2>
+      <div id="projects-container">
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Loading projects...</p>
+      </div>
+    </div>
+
+    <!-- Right Column: Certificates (1/3 width) -->
+    <div class="card">
+      <h2 class="card-title">Certificates</h2>
+      <div id="certificates-container">
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Loading certificates...</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Contact Section -->
+  <div class="card" id="contact">
+    <h2 class="card-title">Contact Me</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="about-text" style="margin-bottom: 1.5rem;">Open to conversations about AI and engineering. Feel free to reach out directly or use the form.</p>
+        <a href="mailto:erfan@erfansalehi.com" class="contact-link">Email: erfan@erfansalehi.com</a>
+        <a href="https://github.com/erfansalehi" class="contact-link" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/erfansalehi" class="contact-link" target="_blank">LinkedIn</a>
+        <a href="https://x.com/erfansalehi" class="contact-link" target="_blank">X (Twitter)</a>
+      </div>
+      
+      <!-- Netlify Contact Form -->
+      <form name="contact" method="POST" data-netlify="true" class="contact-form">
+        <input type="email" name="email" placeholder="Your Email Address" required>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+</div>
 
 <footer>
   © 2026 Erfan Salehi. All rights reserved.
@@ -122,21 +214,24 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
 
-<!-- Script to load your posts from GitHub -->
+<!-- Script to load your posts and split them into the correct columns -->
 <script>
   async function loadPosts() {
-    const container = document.getElementById('post-container');
+    const projectsContainer = document.getElementById('projects-container');
+    const certificatesContainer = document.getElementById('certificates-container');
     
     try {
       const response = await fetch('https://api.github.com/repos/Erfansalehii/portfolio/contents/posts');
       const files = await response.json();
 
       if (!Array.isArray(files) || files.length === 0) {
-        container.innerHTML = '<p style="font-size: 0.8rem; color: var(--muted);">No posts yet.</p>';
+        projectsContainer.innerHTML = '<p class="about-text">No posts yet.</p>';
+        certificatesContainer.innerHTML = '<p class="about-text">No certificates yet.</p>';
         return;
       }
 
-      container.innerHTML = ''; // Clear loading text
+      projectsContainer.innerHTML = ''; 
+      certificatesContainer.innerHTML = ''; 
 
       for (const file of files) {
         if (file.name.endsWith('.md')) {
@@ -147,23 +242,39 @@
           if (parts.length >= 3) {
             const settings = jsyaml.load(parts[1]);
             
-            const dateStr = settings.date ? new Date(settings.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent';
-            const desc = settings.description || 'Click to read more...';
+            // Get the actual content of your post (pictures, text, videos)
+            const markdownBody = parts.slice(2).join('---');
+            const htmlBody = marked.parse(markdownBody);
             
+            const dateStr = settings.date ? new Date(settings.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+            
+            // Build the card
             const card = document.createElement('div');
-            card.className = "post-card";
+            card.className = "post-item";
             card.innerHTML = `
-              <div class="post-date">${dateStr}</div>
               <div class="post-title">${settings.title}</div>
-              <p>${desc}</p>
+              ${dateStr ? `<div class="post-date">${dateStr}</div>` : ''}
+              <div class="post-body">${htmlBody}</div>
             `;
-            container.appendChild(card);
+            
+            // Check the category to decide where it goes
+            if (settings.category === 'Certificate') {
+              certificatesContainer.appendChild(card);
+            } else {
+              projectsContainer.appendChild(card);
+            }
           }
         }
       }
+      
+      // If a column is empty after sorting, show a message
+      if (projectsContainer.innerHTML === '') projectsContainer.innerHTML = '<p class="about-text">No projects yet.</p>';
+      if (certificatesContainer.innerHTML === '') certificatesContainer.innerHTML = '<p class="about-text">No certificates yet.</p>';
+
     } catch (error) {
       console.error("Error:", error);
-      container.innerHTML = '<p style="font-size: 0.8rem; color: var(--muted);">Failed to load posts.</p>';
+      projectsContainer.innerHTML = '<p class="about-text">Failed to load content.</p>';
+      certificatesContainer.innerHTML = '<p class="about-text">Failed to load content.</p>';
     }
   }
 
