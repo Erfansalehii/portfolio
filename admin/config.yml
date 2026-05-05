@@ -7,12 +7,14 @@ public_folder: "/images"
 
 collections:
   - name: "posts"
-    label: "Posts"
+    label: "Posts & Certificates"
     folder: "posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
+      # This line adds the dropdown menu for sorting
+      - {label: "Category", name: "category", widget: "select", options: ["Project", "Certificate"], default: "Project"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      # The body uses Markdown so you can upload pictures, videos, and write long text
+      - {label: "Content (Images, Text, Links)", name: "body", widget: "markdown"}
